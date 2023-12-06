@@ -1,15 +1,15 @@
 import pandas as pd
 
 # Charger les fichiers CSV
-vict_df = pd.read_csv('vict.csv', sep='\t')
-carac_df = pd.read_csv('carac.csv', sep='\t')
-lieux_df = pd.read_csv('lieux.csv', sep='\t')
-veh_df = pd.read_csv('veh.csv', sep='\t')
+carac = pd.read_csv("carac.csv",sep=';')
+lieux = pd.read_csv("lieux.csv",sep=';')
+veh = pd.read_csv("veh.csv",sep=';')
+vict = pd.read_csv("vict.csv",sep=';')
 
 # Fusionner les DataFrames
-merged_df = pd.merge(vict_df, carac_df, on='Num_Acc', how='inner')
-merged_df = pd.merge(merged_df, lieux_df, on='Num_Acc', how='inner')
-merged_df = pd.merge(merged_df, veh_df, on='Num_Acc', how='inner')
+victime = vict.merge(veh,on=['Num_Acc','num_veh'])
+accident = carac.merge(lieux,on = 'Num_Acc')
+merged_df = victime.merge(accident,on='Num_Acc')
 
 # Afficher le DataFrame fusionné
 print(merged_df)
